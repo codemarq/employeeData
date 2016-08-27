@@ -46,6 +46,28 @@ $(document).ready(function () {
 
   });
 
+  //Firebase watcher + initial loader HINT: .on("value")
+database.ref().on("child_added", function(childSnapshot) {
+
+  // Log everything that's coming out of childSnapshot
+  console.log(childSnapshot.val());
+  console.log(childSnapshot.val().name);
+  console.log(childSnapshot.val().role);
+  console.log(childSnapshot.val().startDate);
+  console.log(childSnapshot.val().monthlyRate);
+
+  // Change the HTML to reflect
+  $("#name").html(childSnapshot.val().name);
+  $("#role").html(childSnapshot.val().role);
+  $("#date").html(childSnapshot.val().startDate);
+  $("#rate").html(childSnapshot.val().monthlyRate);
+
+
+// Handle the errors
+}, function(errorObject) {
+
+  console.log("Errors handled: " + errorObject.code);
+});
   // dump the database data to the 'current employees' table
 
 
